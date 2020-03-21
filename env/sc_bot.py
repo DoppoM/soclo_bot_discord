@@ -1,7 +1,7 @@
 import discord
 import random
 
-TOKEN = 'NjkwOTIyNDQ2MDM1MDkxNTM2.XnZ8Qw.xTxhidVrdoLrOirvaZhnvqVscos'
+TOKEN = '----'
 client = discord.Client()
 @client.event
 async def on_message(message):
