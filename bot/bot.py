@@ -6,7 +6,7 @@ import asyncio
 import livechecker
 from discord.ext import commands
 
-discordToken = 'NjkwOTIyNDQ2MDM1MDkxNTM2.Xs7yYA.cYY71o3N__IIdwXHPc_CSyMh_OM'
+discordToken = ''
 notificationChID = '281868313674645504'
 
 discordTtwTrigger = ''
