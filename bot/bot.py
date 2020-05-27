@@ -1,46 +1,16 @@
 import discord
 import random
-import threading
 import time
-import requests
 import json
 import asyncio
+import livechecker
 from discord.ext import commands
 
-discordToken = ''
+discordToken = 'NjkwOTIyNDQ2MDM1MDkxNTM2.Xs7yYA.cYY71o3N__IIdwXHPc_CSyMh_OM'
 notificationChID = '281868313674645504'
 
-twitchClientID = 'zee46vqcynbnldjtso0kui1kb6cf0h'
-twitchLogin = 'cowboy_ebob'
 discordTtwTrigger = ''
-
-class ttwLiveChecker(object):
-    twitchIsStarted = ''
-    twitchTrigger = ''
-    def __init__(self, interval=3):
-        self.interval = interval
-
-        thread = threading.Thread(target=self.liveChecker, args=())
-        thread.daemon = True                            # Daemonize thread
-        thread.start()  
-    
-    
-    def liveChecker(self):
-        while True:
-            response = requests.get('https://api.twitch.tv/helix/streams?user_login={}'.format(twitchLogin), headers={'Client-ID': twitchClientID})
-            jsonRes = json.loads(response.text)
-            try:
-                print(jsonRes["data"][0]["type"])
-                self.twitchIsStarted = 'y'
-                time.sleep(self.interval)
-            except:
-                self.twitchIsStarted = 'n'
-                time.sleep(self.interval)
-
-            if self.twitchTrigger == '' and self.twitchIsStarted == 'y':
-                self.twitchTrigger = 'live'
-            elif self.twitchTrigger == 'live' and self.twitchIsStarted == 'n':
-                self.twitchTrigger = ''
+twitchOnlineCheck = livechecker.ttwLiveChecker()
 
 bot = commands.Bot(command_prefix='sc!')
 
@@ -88,5 +58,4 @@ async def twtest(ctx):
     if twitchOnlineCheck.twitchIsStarted == 'n':
         await ctx.send("-")
 
-twitchOnlineCheck = ttwLiveChecker()
 bot.run(discordToken)
